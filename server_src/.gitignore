@@ -1,7 +1,10 @@
 *.sdf
+*.opensdf
 *.user
 Debug_swarm
 Release_swarm
+Debug
+Release
 
 .vs
 ipch

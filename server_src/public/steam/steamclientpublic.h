@@ -593,7 +593,7 @@ public:
 		V_strncpy(szAuthID, pchSteamID, 63);
 
 		char *szTmp = strtok(szAuthID, ":");
-		while(szTmp = strtok(NULL, ":"))
+		while((szTmp = strtok(NULL, ":")) != NULL)
 		{
 			char *szTmp2 = strtok(NULL, ":");
 			if(szTmp2)
