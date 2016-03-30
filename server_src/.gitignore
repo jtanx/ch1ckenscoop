@@ -1,0 +1,7 @@
+*.sdf
+*.user
+Debug_swarm
+Release_swarm
+
+.vs
+ipch
