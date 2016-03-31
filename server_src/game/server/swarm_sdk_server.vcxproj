@@ -123,10 +123,9 @@
       <OutputFile>$(OutDir)server.bsc</OutputFile>
     </Bscmake>
     <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>
-      </Command>
+      <Message>Copying server DLL into the overlay...</Message>
+      <Command>xcopy /Y ^"$(TargetDir)$(TargetName).dll^" ^"$(SolutionDir)..\server_skeleton\swarm\bin^"
+xcopy /Y ^"$(TargetDir)$(TargetName).pdb^" ^"$(SolutionDir)..\server_skeleton\swarm\bin^"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -203,10 +202,9 @@
       <OutputFile>$(OutDir)server.bsc</OutputFile>
     </Bscmake>
     <PostBuildEvent>
-      <Message>
-      </Message>
-      <Command>
-      </Command>
+      <Message>Copying server DLL into the overlay...</Message>
+      <Command>xcopy /Y ^"$(TargetDir)$(TargetName).dll^" ^"$(SolutionDir)..\server_skeleton\swarm\bin^"
+xcopy /Y ^"$(TargetDir)$(TargetName).pdb^" ^"$(SolutionDir)..\server_skeleton\swarm\bin^"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
