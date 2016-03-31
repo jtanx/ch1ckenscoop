@@ -51,6 +51,10 @@ END_DATADESC()
 
 #endif /* not client */
 
+//Ch1ckensCoop: lots more options for the damage amplifer
+ConVar asw_damage_amp_radius("asw_damage_amp_radius", "120.0", FCVAR_CHEAT, "Radius of the damage amplifier.");
+ConVar asw_damage_amp_duration("asw_damage_amp_duration", "30.0", FCVAR_CHEAT, "Duration (s) of the damage amplifier.");
+
 CASW_Weapon_Buff_Grenade::CASW_Weapon_Buff_Grenade()
 {
 	m_fMinRange1	= 0;
@@ -159,8 +163,8 @@ void CASW_Weapon_Buff_Grenade::PrimaryAttack( void )
 		newVel = vec3_origin;
 	}
 
-	float flRadius = 120.0f;
-	float flDuration = 30.0f;
+	float flRadius = asw_damage_amp_radius.GetFloat();
+	float flDuration = asw_damage_amp_duration.GetFloat();
 	CASW_BuffGrenade_Projectile::Grenade_Projectile_Create( vecSrc, ang, newVel, rotSpeed, pMarine, flRadius, flDuration );
 
 	pMarine->OnWeaponFired( this, 1 );

@@ -339,8 +339,13 @@ bool CASW_MarineSpeech::Chatter(int iChatterType, int iSubChatter, CBasePlayer *
 
 	if (!m_pMarine || !m_pMarine->GetMarineResource() || (m_pMarine->GetHealth()<=0 && iChatterType != CHATTER_DIE))	
 	{
-		AssertMsg( false, "Absent marine tried to chatter\n" );
-		return false;
+		if (m_pMarine->GetHealth() <= 0) {
+			iChatterType = CHATTER_DIE;
+		}
+		else {
+			AssertMsg(false, "Absent marine tried to chatter\n");
+			return false;
+		}
 	}
 	
 	CASW_Marine_Profile *pProfile = m_pMarine->GetMarineResource()->GetProfile();
