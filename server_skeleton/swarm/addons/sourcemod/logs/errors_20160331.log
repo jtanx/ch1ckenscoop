@@ -1,0 +1,28 @@
+L 03/31/2016 - 10:22:00: SourceMod error session started
+L 03/31/2016 - 10:22:00: Info (map "ASI-Jac1-LandingBay_01") (file "errors_20160331.log")
+L 03/31/2016 - 10:22:00: [UPDATER] --- BEGIN ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:22:00: [UPDATER] Could not download "http://update.sourcemod.net/update/"
+L 03/31/2016 - 10:22:00: [UPDATER] Error: Could not resolve host: update.sourcemod.net; Host not found
+L 03/31/2016 - 10:22:00: [UPDATER] --- END ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:23:48: Error log file session closed.
+L 03/31/2016 - 10:26:47: SourceMod error session started
+L 03/31/2016 - 10:26:47: Info (map "asi-jac1-landingbay_pract") (file "errors_20160331.log")
+L 03/31/2016 - 10:26:47: [UPDATER] --- BEGIN ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:26:47: [UPDATER] Could not download "http://update.sourcemod.net/update/"
+L 03/31/2016 - 10:26:47: [UPDATER] Error: Could not resolve host: update.sourcemod.net; Host not found
+L 03/31/2016 - 10:26:47: [UPDATER] --- END ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:27:26: Error log file session closed.
+L 03/31/2016 - 10:28:33: SourceMod error session started
+L 03/31/2016 - 10:28:33: Info (map "ASI-Jac1-LandingBay_01") (file "errors_20160331.log")
+L 03/31/2016 - 10:28:33: [UPDATER] --- BEGIN ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:28:33: [UPDATER] Could not download "http://update.sourcemod.net/update/"
+L 03/31/2016 - 10:28:33: [UPDATER] Error: Could not resolve host: update.sourcemod.net; Host not found
+L 03/31/2016 - 10:28:33: [UPDATER] --- END ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:29:54: Error log file session closed.
+L 03/31/2016 - 10:46:23: SourceMod error session started
+L 03/31/2016 - 10:46:23: Info (map "ASI-Jac1-LandingBay_01") (file "errors_20160331.log")
+L 03/31/2016 - 10:46:23: [UPDATER] --- BEGIN ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:46:23: [UPDATER] Could not download "http://update.sourcemod.net/update/"
+L 03/31/2016 - 10:46:23: [UPDATER] Error: Could not resolve host: update.sourcemod.net; Host not found
+L 03/31/2016 - 10:46:23: [UPDATER] --- END ERRORS FROM AUTOMATIC UPDATER ---
+L 03/31/2016 - 10:47:34: Error log file session closed.
