@@ -6379,7 +6379,7 @@ void CAlienSwarm::SetForceReady(int iForceReadyType)
 		return;
 	}
 
-	m_fForceReadyTime = gpGlobals->curtime + 5.9f;
+	m_fForceReadyTime = gpGlobals->curtime; // +5.9f; // Restart NOW!!!
 	m_iForceReadyCount = 5;
 
 	// check to see if it should end immediately
