@@ -12,6 +12,8 @@ BEGIN_DATADESC( CASW_Tech_Marine_Req )
 	DEFINE_INPUTFUNC( FIELD_VOID,	"EnableTechMarineReq",	InputEnableTechMarineReq ),
 END_DATADESC()
 
+//ch1ckenscoop: Allow non-tech hacking
+extern ConVar asw_marine_allow_non_tech_hacking;
 
 void CASW_Tech_Marine_Req::Spawn()
 {
@@ -20,7 +22,7 @@ void CASW_Tech_Marine_Req::Spawn()
 	//Msg("CASW_Tech_Marine_Req::Spawn setting mission requires tech to true\n");
 	if (ASWGameRules())
 	{
-		ASWGameRules()->m_bMissionRequiresTech = true;
+		ASWGameRules()->m_bMissionRequiresTech = true && !asw_marine_allow_non_tech_hacking.GetBool();
 	}
 }
 
@@ -38,6 +40,6 @@ void CASW_Tech_Marine_Req::InputEnableTechMarineReq( inputdata_t &inputdata )
 	//Msg("CASW_Tech_Marine_Req::InputEnableTechMarineReq setting mission requires tech to true\n");
 	if (ASWGameRules())
 	{
-		ASWGameRules()->m_bMissionRequiresTech = true;
+		ASWGameRules()->m_bMissionRequiresTech = true && !asw_marine_allow_non_tech_hacking.GetBool();
 	}
 }

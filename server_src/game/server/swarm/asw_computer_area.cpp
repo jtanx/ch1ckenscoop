@@ -21,6 +21,7 @@
 #include "tier0/memdbgon.h"
 
 ConVar asw_simple_hacking( "asw_simple_hacking", "0", FCVAR_CHEAT, "Use simple progress bar computer hacking" );
+ConVar asw_marine_allow_non_tech_hacking("asw_marine_allow_non_tech_hacking", "0", FCVAR_CHEAT, "Allow non-techs to perform hacking");
 ConVar asw_ai_computer_hacking_scale( "asw_ai_computer_hacking_scale", "0.1", FCVAR_CHEAT, "Computer hacking speed scale for AI marines" );
 extern ConVar asw_tech_order_hack_range;
 
@@ -233,7 +234,7 @@ void CASW_Computer_Area::ActivateUseIcon( CASW_Marine* pMarine, int nHoldType )
 	}
 			
 	// player has used this item
-	if ( !m_bIsLocked || pMarine->GetMarineProfile()->CanHack() )
+	if ( !m_bIsLocked || pMarine->GetMarineProfile()->CanHack() || asw_marine_allow_non_tech_hacking.GetBool())
 	{
 		if ( !m_bIsInUse )
 		{
@@ -256,7 +257,7 @@ void CASW_Computer_Area::ActivateUseIcon( CASW_Marine* pMarine, int nHoldType )
 				m_fAutoOverrideTime = gpGlobals->curtime + 4.0f;
 
 				//if (!asw_simple_hacking.GetBool())		// if doing complex hacking, launch the interface for it
-				if ( pMarine->IsInhabited() )
+				if ( pMarine->IsInhabited() && pMarine->GetMarineProfile()->CanHack() )
 				{
 					if (!GetCurrentHack())	// if we haven't created a hack object for this computer yet, then create one
 						m_hComputerHack = (CASW_Hack_Computer*) CreateEntityByName( "asw_hack_computer" );
@@ -322,7 +323,7 @@ CASW_Hack_Computer* CASW_Computer_Area::GetCurrentHack()
 // traditional Swarm hacking
 void CASW_Computer_Area::MarineUsing(CASW_Marine* pMarine, float deltatime)
 {
-	if ( asw_simple_hacking.GetBool() || !pMarine->IsInhabited() )
+	if ( asw_simple_hacking.GetBool() || !pMarine->IsInhabited() || !pMarine->GetMarineProfile()->CanHack())
 	{
 		if ( m_bIsInUse && HasDownloadObjective() && GetHackProgress() < 1.0f )
 		{

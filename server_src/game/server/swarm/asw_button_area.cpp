@@ -67,6 +67,7 @@ ConVar asw_ai_button_hacking_scale( "asw_ai_button_hacking_scale", "0.3", FCVAR_
 ConVar asw_tech_order_hack_range( "asw_tech_order_hack_range", "1200", FCVAR_CHEAT, "Max range when searching for a nearby AI tech to hack for you" );
 ConVar asw_debug_button_skin( "asw_debug_button_skin", "0", FCVAR_CHEAT, "If set, button panels will output skin setting details" );
 extern ConVar asw_simple_hacking;
+extern ConVar asw_marine_allow_non_tech_hacking;
 extern ConVar asw_debug_medals;
 
 CASW_Button_Area::CASW_Button_Area()
@@ -139,7 +140,7 @@ void CASW_Button_Area::ActivateUseIcon( CASW_Marine* pMarine, int nHoldType )
 	}
 	if ( m_bIsLocked )
 	{
-		if ( pMarine->GetMarineProfile()->CanHack() )
+		if ( pMarine->GetMarineProfile()->CanHack() || asw_marine_allow_non_tech_hacking.GetBool())
 		{
 			// can hack, get the player to launch his hacking window				
 			if ( !m_bIsInUse )
@@ -153,7 +154,7 @@ void CASW_Button_Area::ActivateUseIcon( CASW_Marine* pMarine, int nHoldType )
 					m_iAliensKilledBeforeHack = ASWGameResource()->GetAliensKilledInThisMission();
 
 					m_OnButtonHackStarted.FireOutput( pMarine, this );
-					if ( !asw_simple_hacking.GetBool() && pMarine->IsInhabited() )
+					if ( !asw_simple_hacking.GetBool() && pMarine->IsInhabited() && pMarine->GetMarineProfile()->CanHack() )
 					{
 						if ( !GetCurrentHack() )	// if we haven't created a hack object for this computer yet, then create one	
 						{
@@ -297,7 +298,7 @@ CASW_Hack* CASW_Button_Area::GetCurrentHack()
 // traditional Swarm hacking
 void CASW_Button_Area::MarineUsing(CASW_Marine* pMarine, float deltatime)
 {
-	if (m_bIsInUse && m_bIsLocked && ( asw_simple_hacking.GetBool() || !pMarine->IsInhabited() ) )
+	if (m_bIsInUse && m_bIsLocked && ( asw_simple_hacking.GetBool() || !pMarine->IsInhabited() || !pMarine->GetMarineProfile()->CanHack()) )
 	{
 		float fTime = (deltatime * (1.0f/((float)m_iHackLevel)));
 		// boost fTime by the marine's hack skill
@@ -413,7 +414,7 @@ void CASW_Button_Area::SetHackProgress(float f, CASW_Marine *pMarine)
 	}
 	if (m_fHackProgress < 1.0f && f >= 1.0f)
 	{	
-		if ( asw_simple_hacking.GetBool() )
+		if ( asw_simple_hacking.GetBool() || !pMarine->GetMarineProfile()->CanHack() )
 		{
 			pMarine->StopUsing();
 		}
