@@ -68,6 +68,7 @@ ConVar asw_player_joined_msg("asw_player_joined_msg", "1", FCVAR_CHEAT, "default
 extern ConVar asw_rts_controls;
 extern ConVar asw_DebugAutoAim;
 extern ConVar asw_debug_marine_damage;
+extern ConVar asw_disable_equipment_requirements_check;
 
 // -------------------------------------------------------------------------------- //
 // Player animation event. Sent to the client when a player fires, jumps, reloads, etc..
@@ -932,12 +933,26 @@ bool CASW_Player::ClientCommand( const CCommand &args )
 					UTIL_ClientPrintAll( ASW_HUD_PRINTTALKANDCONSOLE, "#asw_need_tech" );
 				return true;
 			}
-			else if ( FStrEq( pcmd, "cl_needequip") )
+			else if (FStrEq(pcmd, "cl_needequip"))
 			{
 				if (ASWGameResource()->GetLeader() != this)
 					return true;
-				if (ASWGameRules() && ASWGameRules()->GetGameState() == ASW_GS_BRIEFING)
-					ASWGameRules()->ReportMissingEquipment();
+
+				if (asw_disable_equipment_requirements_check.GetBool())
+				{
+					// check if all players are ready, etc
+					BecomeNonSolid();
+					// send a message to client telling him to close the briefing
+					if (ASWGameRules())
+					{
+						ASWGameRules()->RequestStartMission(this);
+					}
+				}
+				else
+				{
+					if (ASWGameRules() && ASWGameRules()->GetGameState() == ASW_GS_BRIEFING)
+						ASWGameRules()->ReportMissingEquipment();
+				}
 				return true;
 			}
 			else if ( FStrEq( pcmd, "cl_needtwoplayers") )

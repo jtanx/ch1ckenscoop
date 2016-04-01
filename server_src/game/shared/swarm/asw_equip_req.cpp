@@ -186,10 +186,16 @@ bool C_ASW_Equip_Req::ForceWeaponUnlocked( const char *szWeaponClass )
 
 // Shared ==================================
 
+ConVar asw_disable_equipment_requirements_check("asw_disable_equipment_requirements_check", "0", FCVAR_REPLICATED, "Disable checking equipment requirements (such as flamethrower requirement)");
+
+
 bool CASW_Equip_Req::AreRequirementsMet( int arrEquippedReqClasses[ASW_MAX_EQUIP_REQ_CLASSES] /*= NULL*/ )
 {
 	if ( !ASWGameResource() )
 		return false;
+
+	if (asw_disable_equipment_requirements_check.GetBool())
+		return true;
 
 	// Required classes to equip
 	int *numEquippedClasses = arrEquippedReqClasses ? arrEquippedReqClasses : ( int* ) stackalloc( sizeof( arrEquippedReqClasses[0] ) * ASW_MAX_EQUIP_REQ_CLASSES );
