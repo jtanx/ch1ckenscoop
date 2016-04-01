@@ -330,7 +330,14 @@ void CASW_Computer_Area::MarineUsing(CASW_Marine* pMarine, float deltatime)
 			float flOldHackProgress = m_fHackProgress;
 			float fTime = (deltatime * (1.0f/((float)m_iHackLevel)));
 			// boost fTime by the marine's hack skill
-			fTime *= MarineSkills()->GetSkillBasedValueByMarine(pMarine, ASW_MARINE_SKILL_HACKING, ASW_MARINE_SUBSKILL_HACKING_SPEED_SCALE);
+			if (pMarine->GetMarineProfile()->CanHack())
+			{
+				fTime *= MarineSkills()->GetSkillBasedValueByMarine(pMarine, ASW_MARINE_SKILL_HACKING, ASW_MARINE_SUBSKILL_HACKING_SPEED_SCALE);
+			}
+			else
+			{ // They cannot hack... SLOW IT DOWN!
+				fTime *= 0.8 * MAX(1.0f - m_fHackProgress, 0.7);
+			}
 			fTime *= asw_ai_computer_hacking_scale.GetFloat();
 			m_fHackProgress += fTime;
 

@@ -302,7 +302,14 @@ void CASW_Button_Area::MarineUsing(CASW_Marine* pMarine, float deltatime)
 	{
 		float fTime = (deltatime * (1.0f/((float)m_iHackLevel)));
 		// boost fTime by the marine's hack skill
-		fTime *= MarineSkills()->GetSkillBasedValueByMarine(pMarine, ASW_MARINE_SKILL_HACKING, ASW_MARINE_SUBSKILL_HACKING_SPEED_SCALE);
+		if (pMarine->GetMarineProfile()->CanHack())
+		{
+			fTime *= MarineSkills()->GetSkillBasedValueByMarine(pMarine, ASW_MARINE_SKILL_HACKING, ASW_MARINE_SUBSKILL_HACKING_SPEED_SCALE);
+		}
+		else
+		{ // They cannot hack... SLOW IT DOWN!
+			fTime *= 0.8 * MAX(1.0f - m_fHackProgress, 0.7);
+		}
 		fTime *= asw_ai_button_hacking_scale.GetFloat();
 		SetHackProgress(m_fHackProgress + fTime, pMarine);
 	}
